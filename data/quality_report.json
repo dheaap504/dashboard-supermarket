@@ -1,0 +1,132 @@
+{
+  "summary": {
+    "rows_raw": 120000,
+    "cols_raw": 323,
+    "rows_removed": 790,
+    "rows_clean": 119210,
+    "cols_kept": 58,
+    "date_min": "2023-01-01",
+    "date_max": "2024-12-30"
+  },
+  "checks": [
+    {
+      "area": "Konsistensi entitas",
+      "check": "Atribut toko konsisten per ID toko",
+      "result": "100.0% konsisten",
+      "status": "ok",
+      "note": "Satu ID selalu punya atribut yang sama — aman untuk analisis per toko/produk/pelanggan/pemasok."
+    },
+    {
+      "area": "Konsistensi entitas",
+      "check": "Atribut produk konsisten per ID produk",
+      "result": "100.0% konsisten",
+      "status": "ok",
+      "note": "Satu ID selalu punya atribut yang sama — aman untuk analisis per toko/produk/pelanggan/pemasok."
+    },
+    {
+      "area": "Konsistensi entitas",
+      "check": "Atribut pelanggan konsisten per ID pelanggan",
+      "result": "100.0% konsisten",
+      "status": "ok",
+      "note": "Satu ID selalu punya atribut yang sama — aman untuk analisis per toko/produk/pelanggan/pemasok."
+    },
+    {
+      "area": "Konsistensi entitas",
+      "check": "Atribut pemasok konsisten per ID pemasok",
+      "result": "100.0% konsisten",
+      "status": "ok",
+      "note": "Satu ID selalu punya atribut yang sama — aman untuk analisis per toko/produk/pelanggan/pemasok."
+    },
+    {
+      "area": "Rumus",
+      "check": "Penjualan bersih = jumlah × harga jual",
+      "result": "99.34% cocok",
+      "status": "warn",
+      "note": "790 baris tidak cocok (jumlah membengkak) → dikeluarkan dari dashboard."
+    },
+    {
+      "area": "Rumus",
+      "check": "Laba kotor = penjualan bersih − HPP",
+      "result": "99.0% cocok",
+      "status": "ok",
+      "note": "Selisih kecil hanya pada baris anomali di atas."
+    },
+    {
+      "area": "Rumus",
+      "check": "Harga jual = harga normal × (1 − diskon)",
+      "result": "100.0% cocok",
+      "status": "ok",
+      "note": "Data diskon dapat dipercaya."
+    },
+    {
+      "area": "Waktu",
+      "check": "Nama hari sesuai tanggal",
+      "result": "100.0% cocok",
+      "status": "ok",
+      "note": "Analisis per hari/jam valid."
+    },
+    {
+      "area": "Duplikat",
+      "check": "Baris transaksi ganda",
+      "result": "0 baris",
+      "status": "ok",
+      "note": "Tidak ada transaksi ganda."
+    },
+    {
+      "area": "Keranjang belanja",
+      "check": "Satu basket_id = satu pelanggan & toko",
+      "result": "76.01% basket tercampur",
+      "status": "bad",
+      "note": "basket_id dipakai bersama oleh pelanggan/toko berbeda → analisis keranjang (market basket) tidak dipakai."
+    },
+    {
+      "area": "Hari libur",
+      "check": "Nama hari libur sesuai bulannya",
+      "result": "1017 transaksi 'Christmas' di luar Desember",
+      "status": "bad",
+      "note": "Kolom hari libur acak → tidak dipakai."
+    },
+    {
+      "area": "Lokasi",
+      "check": "Koordinat toko tetap",
+      "result": "100.0% toko berpindah koordinat",
+      "status": "bad",
+      "note": "Koordinat berubah tiap transaksi → peta hanya per wilayah, bukan titik toko."
+    },
+    {
+      "area": "Pola waktu",
+      "check": "Variasi penjualan bulanan",
+      "result": "koefisien variasi 2.5%",
+      "status": "warn",
+      "note": "Hampir rata: tidak ada musim maupun pertumbuhan — ciri data sintetis."
+    },
+    {
+      "area": "Kepuasan & layanan",
+      "check": "Kepuasan berhubungan dengan faktor lain",
+      "result": "korelasi tertinggi 0.009",
+      "status": "bad",
+      "note": "Kepuasan, churn, loyalitas, antrean bersifat acak → hanya ditampilkan komposisinya."
+    },
+    {
+      "area": "Kepuasan & layanan",
+      "check": "Tier membership membedakan belanja",
+      "result": "selisih rata-rata belanja antar tier 1.5%",
+      "status": "bad",
+      "note": "Tidak ada perbedaan berarti → bukan insight."
+    },
+    {
+      "area": "Kolom",
+      "check": "Kolom bernilai tunggal (tidak informatif)",
+      "result": "6 kolom",
+      "status": "warn",
+      "note": "store_size_sqft, country, stockout_status, low_stock_status, reorder_quantity, reorder_status"
+    },
+    {
+      "area": "Kolom",
+      "check": "Kolom dengan nilai kosong",
+      "result": "28 kolom",
+      "status": "ok",
+      "note": "Sebagian besar wajar kosong (mis. alasan retur hanya terisi bila ada retur)."
+    }
+  ]
+}
