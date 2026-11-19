@@ -1,5 +1,15 @@
-__pycache__/
-*.pyc
-.streamlit/secrets.toml
-raw/
-*.csv
+[theme]
+base = "light"
+primaryColor = "#4318FF"
+backgroundColor = "#F4F7FE"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#1B2559"
+borderColor = "#E9EDF7"
+baseRadius = "12px"
+font = "DM Sans"
+
+[server]
+headless = true
+
+[client]
+toolbarMode = "minimal"
